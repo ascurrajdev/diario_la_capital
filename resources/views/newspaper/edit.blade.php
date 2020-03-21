@@ -67,13 +67,11 @@
                       </form>
                     </div>
                     <div class="mb-3">
-                      <div class="form-group">
-                          <label>Contenido:</label>
-                          <div>Hola a todos</div>
-                      </div>
+                      <textarea class="textarea" id="textarea" placeholder="Place some text here"
+                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">Hola a todos</textarea>
                     </div>
                     <p class="text-sm mb-0">
-                      <a href="{{url('post')}}" class="btn btn-success"><i class="ion ion-arrow-left-c"></i> Volver</a>
+                      <button class="btn btn-success">Guardar Cambios</button>
                     </p>
                   </div>
                 </div>
@@ -84,7 +82,16 @@
 
     </div>
   </section>
+
+
 @endsection
 
 @section('scriptbody')
+<script src="{{asset('js/summernote-bs4.min.js')}}"></script>
+<script>
+    $(function () {
+    // Summernote
+    $('.textarea').summernote()
+  })
+</script>
 @endsection

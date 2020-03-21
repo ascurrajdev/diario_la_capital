@@ -26,13 +26,15 @@
     </div>
 
     <section class="content">
+        <form method="POST" action="{{url('post')}}">
+        @csrf
         <div class="container-fluid">
             <div class="row">
               <div class="col-md-12">
                 <div class="card card-outline card-info">
                   <div class="card-header">
                     <h3 class="card-title">
-                      Nuevo caso de coronavirus
+                      Nueva noticia
                     </h3>
                     <!-- tools box -->
                     <div class="card-tools">
@@ -48,32 +50,41 @@
                   <!-- /.card-header -->
                   <div class="card-body pad">
                     <div class="mb-2">
-                      <form>
+                     
                         <div class="row">
+                            <div class="form-group col-lg-12">
+                                <label for="titulo">Titulo de la noticia</label>
+                                <input type="text" name="titulo" class="form-control" placeholder="Introduzca un titulo" required="true"/>
+                            </div>
                           <div class="form-group col-lg-5">
                             <label for="tipoNoticia">Categoria de la noticia:</label>
-                            <select id="tipoNoticia" class="form-control">
-                              <option>Nacional</option>
+                            <select id="tipoNoticia" name="categoria" required="true" class="form-control">
+                              @foreach ($categorias as $categoria)
+                                <option value="{{$categoria['id']}}">{{$categoria['nombre_categoria']}}</option>
+                              @endforeach
                             </select>
                           </div>
 
                           <div class="form-group col-lg-5">
                             <label for="nivelRelevancia">Nivel de relevancia:</label>
-                            <select id="nivelRelevancia" class="form-control">
-                              <option>Urgente</option>
+                            <select id="nivelRelevancia" name="relevancia" required="true" class="form-control">
+                              @foreach ($relevancias as $relevancia)
+                                <option value="{{$relevancia['id']}}">{{$relevancia['nombre_relevancia']}}</option>
+                              @endforeach
                             </select>
                           </div>
                         </div>
-                      </form>
+                      
                     </div>
                     <div class="mb-3">
-                      <div class="form-group">
-                          <label>Contenido:</label>
-                          <div>Hola a todos</div>
-                      </div>
+                        <label for="textarea">Contenido:</label>
+                      <textarea name="contenido" required="true" class="textarea" id="textarea" placeholder="Place some text here"
+                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">Hola a todos</textarea>
                     </div>
                     <p class="text-sm mb-0">
-                      <a href="{{url('post')}}" class="btn btn-success"><i class="ion ion-arrow-left-c"></i> Volver</a>
+                      <button type="submit" class="btn btn-success">
+                        <i class="ion ion-archive"></i>&nbsp;  
+                        Guardar</button>
                     </p>
                   </div>
                 </div>
@@ -82,9 +93,19 @@
             </div>
         </div>
 
-    </div>
+        </div>
+    </form>
   </section>
+
+
 @endsection
 
 @section('scriptbody')
+<script src="{{asset('js/summernote-bs4.min.js')}}"></script>
+<script>
+    $(function () {
+    // Summernote
+    $('.textarea').summernote()
+  })
+</script>
 @endsection

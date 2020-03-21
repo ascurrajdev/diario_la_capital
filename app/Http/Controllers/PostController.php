@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Relevancia;
+use App\Categoria;
+use App\Post;
+use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     /**
@@ -23,7 +26,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $relevancia = Relevancia::all();
+        $categorias = Categoria::all();
+        return view('newspaper.nuevo',['url' => 'Crear', 'categorias' => $categorias, 'relevancias' => $relevancia]);
     }
 
     /**
@@ -34,7 +39,15 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post;
+        $post->id = null;
+        $post->user_id = Auth::id();
+        $post->contenido_noticia = $request->input('contenido');
+        $post->titulo_noticia = $request->input('titulo');
+        $post->nivel_relevancia_id = $request->input('relevancia');
+        $post->categoria_id = $request->input('categoria');
+        $post->save();
+        return redirect("post");
     }
 
     /**
@@ -56,7 +69,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('newspaper.edit',['url' => $id]);
     }
 
     /**

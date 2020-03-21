@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
 @guest
 <div class="hold-transition login-page" style="background-color:white;">

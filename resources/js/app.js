@@ -7,7 +7,8 @@
 require('./bootstrap');
 $(function () {
     // Summernote
-    $('.textarea').summernote()
+    $('.textarea').summernote();
+    
 })
 window.Vue = require('vue');
 

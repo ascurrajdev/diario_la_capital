@@ -20,7 +20,7 @@
 
     <section class="content">
         <div class="container-fluid">
-            <button class="btn bg-gradient-success mb-2"><span class="ion ion-plus"></span>&nbsp;Nueva noticia</button><br/>
+            <a href="{{url('post/create')}}" class="btn bg-gradient-success mb-2"><span class="ion ion-plus"></span>&nbsp;Nueva noticia</a><br/>
             <div class="card card-outline card-danger">
                 <div class="card-header">
                     <h3 class="card-title">Nuevo caso de coronavirus</h3>
@@ -41,7 +41,7 @@
                         </span>
                     
                         <a href="{{url('post/1')}}" class="btn text-decoration-none btn-flat bg-gradient-secondary"><span class="ion ion-eye"></span></a>  
-                      <button class="btn btn-flat bg-gradient-primary"><span class="ion ion-edit"></span></button>
+                        <a href="{{url('post/1/edit')}}" class="btn btn-flat text-decoration-none bg-gradient-primary"><span class="ion ion-edit"></span></a>
                       <button class="btn btn-flat bg-gradient-danger"><span class="ion ion-trash-a"></span></button>
                     </div>
                     <!-- /.card-tools -->
@@ -54,5 +54,4 @@
 
     </div>
     </section>
-</div>
 @endsection

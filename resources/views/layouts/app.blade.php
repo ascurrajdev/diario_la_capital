@@ -9,28 +9,19 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/adminlte.min.js') }}" defer></script>
-    <script src="{{ asset('js/summernote-bs4.min.js') }}" defer></script>
-
     <!-- Fonts -->
+    <link rel="stylesheet" href="{{asset('css/all.min.css')}}" />
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
     <!-- Styles -->
-    <link rel="stylesheet" href="//unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="{{asset('css/summernote.css')}}">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/adminlte.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/icheck-bootstrap.min.css') }}" rel="stylesheet">
-</head>
-<body>
-    <div id="app">
+    <link rel="stylesheet" href="{{asset('css/adminlte.min.css')}}">
+    @yield('styles')  
+  </head>
+<body class="hold-transition sidebar-mini">
+      <div class="wrapper" id="app">
         @guest
-        @else                            
+        @else            
+                      
                         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
                             <!-- Left navbar links -->
                             <ul class="navbar-nav">
@@ -199,13 +190,20 @@
                                       </p>
                                     </a>
                                   </li>
-                                  <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                      <i class="nav-icon fas fa-th"></i>
+                                  <li class="nav-item has-treeview">
+                                    <a href="{{url('post')}}" class="nav-link">
+                                      <i class="nav-icon ion ion-ios-paper"></i>
                                       <p>
-                                        Simple Link
+                                         Noticias
+                                         <i class="right fas fa-angle-left"></i>
                                       </p>
                                     </a>
+                                    <ul class="nav nav-treeview">
+                                      <li class="nav-item">
+                                        <a class="nav-link" href="#">
+                                          <i class="ion nav-icon ion-ios-list"></i>
+                                          Categorias</a></li>
+                                    </ul>
                                   </li>
                                 </ul>
                               </nav>
@@ -216,9 +214,19 @@
                         
         @endguest
 
-        <main>
             @yield('content')
-        </main>
+            <footer class="main-footer">
+              <div class="float-right d-none d-sm-block">
+                <b>Version</b> 1.0
+              </div>
+              <strong>Copyright &copy; 2020 Dev.Jose Ascura</strong> All rights
+              reserved.
+            </footer>
+          </div>
     </div>
+    <script src="{{asset('js/jquery.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('js/adminlte.min.js')}}"></script>
+    @yield('scriptbody')
 </body>
 </html>
