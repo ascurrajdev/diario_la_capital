@@ -32,7 +32,7 @@
                 <div class="card card-outline card-info">
                   <div class="card-header">
                     <h3 class="card-title">
-                      Nuevo caso de coronavirus
+                      {{$noticia->titulo_noticia}}
                     </h3>
                     <!-- tools box -->
                     <div class="card-tools">
@@ -53,14 +53,14 @@
                           <div class="form-group col-lg-5">
                             <label for="tipoNoticia">Categoria de la noticia:</label>
                             <select id="tipoNoticia" class="form-control">
-                              <option>Nacional</option>
+                              <option>{{$noticia->categoria->nombre_categoria}}</option>
                             </select>
                           </div>
 
                           <div class="form-group col-lg-5">
                             <label for="nivelRelevancia">Nivel de relevancia:</label>
                             <select id="nivelRelevancia" class="form-control">
-                              <option>Urgente</option>
+                              <option>{{$noticia->relevancia->nombre_relevancia}}</option>
                             </select>
                           </div>
                         </div>
@@ -69,7 +69,7 @@
                     <div class="mb-3">
                       <div class="form-group">
                           <label>Contenido:</label>
-                          <div>Hola a todos</div>
+                          <div>{!!trans($noticia->contenido_noticia)!!}</div>
                       </div>
                     </div>
                     <p class="text-sm mb-0">

@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 Route::resource('encuestas', 'EncuestasController');
 Route::resource('post', 'PostController');
+Route::resource('categoria', 'CategoriasController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('Dashboard');

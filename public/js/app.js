@@ -49527,6 +49527,33 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('color-opcion', {
+  props: []
+});
+/*
+Componente para el boton de eliminar
+*/
+
+Vue.component('boton-eliminar', {
+  props: ['id'],
+  template: '<button @click="eliminarItem" class="btn btn-flat bg-gradient-danger" :data-id="id"><span class="ion ion-trash-a"></span></button>',
+  methods: {
+    eliminarItem: function eliminarItem(e) {
+      var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+      var formData = new FormData();
+      formData.append('_token', CSRF_TOKEN);
+      formData.append('_method', 'DELETE');
+      fetch(location.href + "/" + e.target.getAttribute("data-id"), {
+        method: 'POST',
+        body: formData
+      }).then(function (response) {
+        if (response.ok) {
+          console.log(e.target.parentNode.parentNode.parentNode.parentNode.remove(e.target));
+        }
+      }); //window.location.reload(true);
+    }
+  }
+});
 var app = new Vue({
   el: '#app'
 });

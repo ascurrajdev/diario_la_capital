@@ -29,11 +29,14 @@
         <div class="container-fluid">
             <div class="row">
               <div class="col-md-12">
+                <form method="POST" action="{{url('post/'.$noticia->id)}}">
+                  @method('PUT')
+                  @csrf
                 <div class="card card-outline card-info">
                   <div class="card-header">
-                    <h3 class="card-title">
-                      Nuevo caso de coronavirus
-                    </h3>
+                    
+                    <input type="text" class="card-title" name="tituloNoticia" value="{{$noticia->titulo_noticia}}">
+                      
                     <!-- tools box -->
                     <div class="card-tools">
                       <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
@@ -48,31 +51,44 @@
                   <!-- /.card-header -->
                   <div class="card-body pad">
                     <div class="mb-2">
-                      <form>
+                      
                         <div class="row">
                           <div class="form-group col-lg-5">
                             <label for="tipoNoticia">Categoria de la noticia:</label>
-                            <select id="tipoNoticia" class="form-control">
-                              <option>Nacional</option>
+                            <select id="tipoNoticia" name="categoriaNoticia" class="form-control">
+                              @foreach($categorias as $categoria)
+                                @if($categoria->id === $noticia->categoria->id)
+                                  <option value="{{$categoria->id}}" active>{{$categoria->nombre_categoria}}</option>
+                                @else
+                                  <option value="{{$categoria->id}}">{{$categoria->nombre_categoria}}</option>
+                                @endif
+                              @endforeach
                             </select>
                           </div>
 
                           <div class="form-group col-lg-5">
                             <label for="nivelRelevancia">Nivel de relevancia:</label>
-                            <select id="nivelRelevancia" class="form-control">
-                              <option>Urgente</option>
+                            <select id="nivelRelevancia" name="nivelRelevancia" class="form-control">
+                              @foreach($relevancias as $relevancia)
+                                @if($relevancia->id === $noticia->relevancia->id)
+                                  <option value="{{$relevancia->id}}" active>{{$relevancia->nombre_relevancia}}</option>
+                                @else
+                                  <option value="{{$relevancia->id}}">{{$relevancia->nombre_relevancia}}</option>
+                                @endif
+                              @endforeach
                             </select>
                           </div>
                         </div>
-                      </form>
+                      
                     </div>
                     <div class="mb-3">
-                      <textarea class="textarea" id="textarea" placeholder="Place some text here"
-                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">Hola a todos</textarea>
+                      <textarea name="contenidoNoticia" class="textarea" id="textarea" placeholder="Place some text here"
+                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$noticia->contenido_noticia}}</textarea>
                     </div>
                     <p class="text-sm mb-0">
-                      <button class="btn btn-success">Guardar Cambios</button>
+                      <button type="submit" class="btn btn-success">Guardar Cambios</button>
                     </p>
+                  </form>
                   </div>
                 </div>
               </div>

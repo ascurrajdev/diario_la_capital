@@ -16,7 +16,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('newspaper.index',['url'=>'Noticias']);
+        $paginador = Post::orderBy('created_at', 'desc')
+                            ->paginate(25);
+        return view('newspaper.index',['url'=>'Noticias','Noticias' => $paginador]);
     }
 
     /**
@@ -58,7 +60,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        return view('newspaper.show',['url' => $id]);
+        return view('newspaper.show',['url' => $id,'noticia' => Post::find($id) ]);
     }
 
     /**
@@ -69,7 +71,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        return view('newspaper.edit',['url' => $id]);
+        return view('newspaper.edit',['url' => $id, 'noticia' => Post::find($id), 'categorias' => Categoria::all(), 'relevancias' => Relevancia::all()]);
     }
 
     /**
@@ -81,7 +83,13 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $PostAux = Post::find($id);
+        $PostAux->contenido_noticia = $request->input("contenidoNoticia");
+        $PostAux->titulo_noticia = $request->input("tituloNoticia");
+        $PostAux->nivel_relevancia_id = $request->input("nivelRelevancia");
+        $PostAux->categoria_id = $request->input("categoriaNoticia");
+        $PostAux->save();
+        return redirect("post");
     }
 
     /**
@@ -92,6 +100,6 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::destroy($id);
     }
 }
