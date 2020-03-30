@@ -31,7 +31,7 @@
             <div class="card card-outline {{$arrayNoticiasStyle[$noticia->relevancia->id]}}">
                 <div class="card-header">
                     <h3 class="card-title">{{$noticia->titulo_noticia}}</h3>
-                    <span class="ml-2 badge badge-warning">{{$noticia->categoria->nombre_categoria}}</span>
+                    <span class="ml-2 badge {{$noticia->categoria->color->style_color}}">{{$noticia->categoria->nombre_categoria}}</span>
                     <span class="pl-2 badge {{$arrayRelevanciaStyle[$noticia->relevancia->id]}}">{{$noticia->relevancia->nombre_relevancia}}</span>
                     <div class="card-tools">
                       <!-- Buttons, labels, and many other things can be placed here! -->

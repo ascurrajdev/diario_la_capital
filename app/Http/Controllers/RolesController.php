@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Categoria;
-use App\Color;
-class CategoriasController extends Controller
+
+class RolesController extends Controller
 {
     public function __construct(){
         $this->middleware('auth');
@@ -17,7 +16,7 @@ class CategoriasController extends Controller
      */
     public function index()
     {
-        return view("categorias.index", ["url" => "Categorias", "categorias" => Categoria::all()]);
+        return view('users.roles.index', ["url"=>"Roles de Usuario"]);
     }
 
     /**
@@ -27,7 +26,7 @@ class CategoriasController extends Controller
      */
     public function create()
     {
-        return view('categorias.nuevo', ["url"=>"Nuevo","colores"=>Color::all()]);
+        return view("users.roles.create", ["url"=>"Crear"]);
     }
 
     /**
@@ -38,12 +37,7 @@ class CategoriasController extends Controller
      */
     public function store(Request $request)
     {
-        $categoria = new Categoria;
-        $categoria->id=null;
-        $categoria->nombre_categoria = $request->input('nombreCategoria');
-        $categoria->color_id = $request->input('colorCategoria');
-        $categoria->save();
-        return redirect(route('categoria.index'));
+        //
     }
 
     /**
@@ -65,8 +59,6 @@ class CategoriasController extends Controller
      */
     public function edit($id)
     {
-        //return Categoria::find($id);
-        return view('categorias.edit', ["url"=>"Editar","categoria"=>Categoria::find($id),"colores"=>Color::all()]);
     }
 
     /**
@@ -78,11 +70,7 @@ class CategoriasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $categoria = Categoria::find($id);
-        $categoria->nombre_categoria = $request->input('nombreCategoria');
-        $categoria->color_id = $request->input('colorCategoria');
-        $categoria->save();
-        return redirect(route('categoria.index'));
+        //
     }
 
     /**
@@ -93,6 +81,6 @@ class CategoriasController extends Controller
      */
     public function destroy($id)
     {
-        
+        //
     }
 }

@@ -21,6 +21,7 @@
 
     <section class="content">
         <div class="container-fluid">
+            <a href="{{url('categoria/create')}}" class="btn bg-gradient-success mb-2"><span class="ion ion-plus"></span>&nbsp;Nueva Categoria</a><br/>
             <table class="table">
                 <thead>
                     <tr>
@@ -38,18 +39,15 @@
                 <tr>
                     <td>{{$contador++}}</td>
                     <td>{{$categoria->nombre_categoria}}</td>
-                    <td class="form-group">
-                        <label class="bg-danger color-palette pr-5">&nbsp;</label>
-                        <select>
-                            <option>Primario</option>
-                            <option class="bg-success">Exitoso</option>    
-                        </select>
+                    <td>
+                        <label id="previewColor" class="{{$categoria->color->style_color}} color-palette pr-5">&nbsp;</label>
+                        <label>{{$categoria->color->nombre_color}}</label>
                     </td>
                     <td>
                         <form>
                             <div class="form-group">
-                                <button class="btn btn-success">Editar</button>
-                                <button class="btn btn-danger">Eliminar</button>
+                                <a href="{{url('categoria/'.$categoria->id.'/edit')}}" class="btn btn-success">Editar</a>
+                                <!--<button class="btn btn-danger">Eliminar</button>-->
                             </div>
                         </form>
                     </td>
@@ -62,4 +60,14 @@
     </section>
 @endsection
 @section('scriptbody')
+<script src="{{asset('js/app.js')}}"></script>
+<script>
+    /*let arrayColores = {1:"bg-primary", 2:"bg-secondary", 3:"bg-warning", 4:"bg-success", 5:"bg-danger", 6:"bg-info"}; 
+    $('#previewColor').removeClass();
+    $('#previewColor').addClass(`${arrayColores[($('#paletaOpcion').val())]} pr-5`);
+    $('#paletaOpcion').change(function(e){
+        $('#previewColor').removeClass();
+        $('#previewColor').addClass(`${arrayColores[(e.target.value)]} pr-5`);
+    });*/
+</script>
 @endsection

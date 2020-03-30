@@ -11,9 +11,12 @@ class EncuestasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->middleware('auth');
+    }
     public function index()
     {
-        return view('encuestas.index');
+        return view('encuestas.index', ["url" => "Encuestas"]);
     }
 
     /**
@@ -23,7 +26,7 @@ class EncuestasController extends Controller
      */
     public function create()
     {
-        //
+    
     }
 
     /**
@@ -34,7 +37,7 @@ class EncuestasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return "Hola a todos";
     }
 
     /**

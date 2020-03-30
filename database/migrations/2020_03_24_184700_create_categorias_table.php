@@ -16,7 +16,9 @@ class CreateCategoriasTable extends Migration
         Schema::create('categorias', function (Blueprint $table) {
             $table->id();
             $table->string('nombre_categoria');
+            $table->unsignedBigInteger('color_id');
             $table->timestamps();
+            $table->foreign('color_id')->references('id')->on('colors');
         });
     }
 
@@ -27,6 +29,6 @@ class CreateCategoriasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categorias');
+        Schema::dropIfExists('colors');
     }
 }

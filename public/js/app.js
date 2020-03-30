@@ -49527,9 +49527,6 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('color-opcion', {
-  props: []
-});
 /*
 Componente para el boton de eliminar
 */
@@ -49548,9 +49545,9 @@ Vue.component('boton-eliminar', {
         body: formData
       }).then(function (response) {
         if (response.ok) {
-          console.log(e.target.parentNode.parentNode.parentNode.parentNode.remove(e.target));
+          window.location.reload(true); //console.log(e.target.parentNode.parentNode.parentNode.parentNode.remove(e.target));
         }
-      }); //window.location.reload(true);
+      }); //
     }
   }
 });

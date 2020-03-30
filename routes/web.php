@@ -16,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.login');
 });
+Auth::routes();
+Route::resource('roles', 'RolesController');
 Route::resource('encuestas', 'EncuestasController');
 Route::resource('post', 'PostController');
 Route::resource('categoria', 'CategoriasController');
-Auth::routes();
+Route::resource('usuarios', 'UsuariosController');
 
 Route::get('/home', 'HomeController@index')->name('Dashboard');

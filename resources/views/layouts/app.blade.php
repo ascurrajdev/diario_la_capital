@@ -191,7 +191,7 @@
                                     </a>
                                   </li>
                                   <li class="nav-item has-treeview">
-                                    <a href="{{url('post')}}" class="nav-link">
+                                    <a href="#" class="nav-link">
                                       <i class="nav-icon ion ion-ios-paper"></i>
                                       <p>
                                          Noticias
@@ -203,6 +203,29 @@
                                         <a class="nav-link" href="{{url("categoria")}}">
                                           <i class="ion nav-icon ion-ios-list"></i>
                                           Categorias</a></li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" href="{{url("post")}}">
+                                          <i class="ion nav-icon ion-ios-list"></i>
+                                          Todas las noticias</a></li>
+                                    </ul>
+                                  </li>
+                                  <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                      <i class="nav-icon ion ion-person"></i>
+                                      <p>
+                                         Usuarios
+                                         <i class="right fas fa-angle-left"></i>
+                                      </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                      <li class="nav-item">
+                                        <a class="nav-link" href="{{url("roles")}}">
+                                          <i class="ion nav-icon ion-ios-list"></i>
+                                          Permisos</a></li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" href="{{url("usuarios")}}">
+                                          <i class="ion nav-icon ion-person-stalker"></i>
+                                          Todos los usuarios</a></li>
                                     </ul>
                                   </li>
                                 </ul>

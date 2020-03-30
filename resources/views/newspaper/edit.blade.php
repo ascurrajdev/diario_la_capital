@@ -58,7 +58,7 @@
                             <select id="tipoNoticia" name="categoriaNoticia" class="form-control">
                               @foreach($categorias as $categoria)
                                 @if($categoria->id === $noticia->categoria->id)
-                                  <option value="{{$categoria->id}}" active>{{$categoria->nombre_categoria}}</option>
+                                  <option value="{{$categoria->id}}" selected="selected">{{$categoria->nombre_categoria}}</option>
                                 @else
                                   <option value="{{$categoria->id}}">{{$categoria->nombre_categoria}}</option>
                                 @endif
@@ -71,7 +71,7 @@
                             <select id="nivelRelevancia" name="nivelRelevancia" class="form-control">
                               @foreach($relevancias as $relevancia)
                                 @if($relevancia->id === $noticia->relevancia->id)
-                                  <option value="{{$relevancia->id}}" active>{{$relevancia->nombre_relevancia}}</option>
+                                  <option value="{{$relevancia->id}}" selected="selected">{{$relevancia->nombre_relevancia}}</option>
                                 @else
                                   <option value="{{$relevancia->id}}">{{$relevancia->nombre_relevancia}}</option>
                                 @endif

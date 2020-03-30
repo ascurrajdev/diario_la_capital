@@ -1,73 +1,105 @@
-@extends('app')
-@section('contenido')
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                Encuestas
-            </div>
-            <div class="card-body">
-                <div class="container-fluid">
-                    <a href="#" class="text-decoration-none card shadow mt-2 text-dark">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <div class="row">
-                                        <div class="col-lg-12 float-left"><h2>Encuesta sobre x cosa</h2></div>
-                                        <div class="col-lg-12 float-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, veniam quod magni hic facere eius odit consequatur? Consequuntur dignissimos reprehenderit fugit, veritatis perferendis cum iusto maxime, nostrum debitis vero quibusdam.</div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="row">
-                                        <div class="col-lg-12 float-right h-100 w-100">
-                                            <canvas id="estadistica"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+@extends('layouts.app')
 
-                    <a href="#" class="text-decoration-none card shadow mt-2 text-dark">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <div class="row">
-                                        <div class="col-lg-12 float-left"><h2>Encuesta sobre x cosa</h2></div>
-                                        <div class="col-lg-12 float-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, veniam quod magni hic facere eius odit consequatur? Consequuntur dignissimos reprehenderit fugit, veritatis perferendis cum iusto maxime, nostrum debitis vero quibusdam.</div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="row">
-                                        <div class="col-lg-12 float-right h-100 w-100">
-                                            <canvas id="estadistica1"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+@section('content')
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+          <h1 class="m-0 text-dark">{{$url}}</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">{{$url}}</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
 
-                    <a href="#" class="text-decoration-none card shadow mt-2 text-dark">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <div class="row">
-                                        <div class="col-lg-12 float-left"><h2>Encuesta sobre x cosa</h2></div>
-                                        <div class="col-lg-12 float-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, veniam quod magni hic facere eius odit consequatur? Consequuntur dignissimos reprehenderit fugit, veritatis perferendis cum iusto maxime, nostrum debitis vero quibusdam.</div>
+    <section class="content">
+        <div class="container-fluid">
+            <a href="{{url('categoria/create')}}" class="btn bg-gradient-success mb-2"><span class="ion ion-plus"></span>&nbsp;Nueva Encuesta</a><br/>
+            <div class="card">
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <a href="#" class="text-decoration-none card shadow mt-2 text-dark">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="row">
+                                            <div class="col-lg-12 float-left"><h2>Encuesta sobre x cosa</h2></div>
+                                            <div class="col-lg-12 float-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, veniam quod magni hic facere eius odit consequatur? Consequuntur dignissimos reprehenderit fugit, veritatis perferendis cum iusto maxime, nostrum debitis vero quibusdam.</div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="row">
-                                        <div class="col-lg-12 float-right h-100 w-100">
-                                            <canvas id="estadistica2"></canvas>
+                                    <div class="col-lg-4">
+                                        <div class="row">
+                                            <div class="col-lg-12 float-right h-100 w-100">
+                                                <canvas id="estadistica"></canvas>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+    
+                        <a href="#" class="text-decoration-none card shadow mt-2 text-dark">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="row">
+                                            <div class="col-lg-12 float-left"><h2>Encuesta sobre x cosa</h2></div>
+                                            <div class="col-lg-12 float-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, veniam quod magni hic facere eius odit consequatur? Consequuntur dignissimos reprehenderit fugit, veritatis perferendis cum iusto maxime, nostrum debitis vero quibusdam.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="row">
+                                            <div class="col-lg-12 float-right h-100 w-100">
+                                                <canvas id="estadistica1"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+    
+                        <a href="#" class="text-decoration-none card shadow mt-2 text-dark">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="row">
+                                            <div class="col-lg-12 float-left"><h2>Encuesta sobre x cosa</h2></div>
+                                            <div class="col-lg-12 float-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, veniam quod magni hic facere eius odit consequatur? Consequuntur dignissimos reprehenderit fugit, veritatis perferendis cum iusto maxime, nostrum debitis vero quibusdam.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="row">
+                                            <div class="col-lg-12 float-right h-100 w-100">
+                                                <canvas id="estadistica2"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    </section>
 @endsection
+@section('scriptbody')
+<script src="{{asset('js/app.js')}}"></script>
+@endsection
+
+
+
+
+
+
+
+
+
