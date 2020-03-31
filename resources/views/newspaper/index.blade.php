@@ -49,7 +49,7 @@
                     
                         <a href="{{url('post/'.$noticia->id)}}" class="{{(collect(Auth::user()->role->json_role["permisos"]["noticias"]))->search("ver")>-1  ? '': 'd-none' }} btn text-decoration-none btn-flat bg-gradient-secondary"><span class="ion ion-eye"></span></a>  
                         <a href="{{url('post/'.$noticia->id.'/edit')}}" class="{{(collect(Auth::user()->role->json_role["permisos"]["noticias"]))->search("modificar")>-1  ? '': 'd-none' }} btn btn-flat text-decoration-none bg-gradient-primary"><span class="ion ion-edit"></span></a>
-                        <boton-eliminar class="{{(collect(Auth::user()->role->json_role["permisos"]["noticias"]))->search("ver")>-1  ? '': 'd-none' }}" id="{{$noticia->id}}"/>
+                        <boton-eliminar class="{{(collect(Auth::user()->role->json_role["permisos"]["noticias"]))->search("eliminar")>-1  ? '': 'd-none' }}" id="{{$noticia->id}}"/>
                         <!--<button class="btn btn-flat bg-gradient-danger" data-id="{{$noticia->id}}"><span class="ion ion-trash-a"></span></button>
                         -->
                     </div>

@@ -21,14 +21,14 @@
 
     <section class="content">
         <div class="container-fluid">
-            <a href="{{url('categoria/create')}}" class="btn bg-gradient-success mb-2"><span class="ion ion-plus"></span>&nbsp;Nueva Categoria</a><br/>
+            <a href="{{url('categoria/create')}}" class="{{(collect(Auth::user()->role->json_role["permisos"]["noticias"]))->search("crear")>-1  ? '': 'd-none' }} btn bg-gradient-success mb-2"><span class="ion ion-plus"></span>&nbsp;Nueva Categoria</a><br/>
             <table class="table">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Nombre Categoria</th>
                         <th>Color de la Categoria</th>
-                        <th>Acciones</th>
+                        <th class="{{(collect(Auth::user()->role->json_role["permisos"]["noticias"]))->search("modificar")>-1  ? '': 'd-none' }}">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,7 +46,7 @@
                     <td>
                         <form>
                             <div class="form-group">
-                                <a href="{{url('categoria/'.$categoria->id.'/edit')}}" class="btn btn-success">Editar</a>
+                                <a href="{{url('categoria/'.$categoria->id.'/edit')}}" class="{{(collect(Auth::user()->role->json_role["permisos"]["noticias"]))->search("modificar")>-1  ? '': 'd-none' }} btn btn-success">Editar</a>
                                 <!--<button class="btn btn-danger">Eliminar</button>-->
                             </div>
                         </form>
