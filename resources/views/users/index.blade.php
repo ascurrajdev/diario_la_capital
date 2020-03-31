@@ -21,7 +21,7 @@
 
     <section class="content">
         <div class="container-fluid">
-            <a href="{{url('usuarios/create')}}" class="btn bg-gradient-success mb-2"><span class="ion ion-person-add"></span>&nbsp;Nuevo Usuario</a><br/>
+            <a href="{{url('usuarios/create')}}" class=" {{(collect(Auth::user()->role->json_role["permisos"]["usuarios"]))->search("crear")>-1  ? '': 'd-none' }} btn bg-gradient-success mb-2"><span class="ion ion-person-add"></span>&nbsp;Nuevo Usuario</a><br/>
             <table class="table">
                 <thead>
                     <tr>
@@ -29,7 +29,8 @@
                         <th>Nombre Usuario</th>
                         <th>Email Usuario</th>
                         <th>Contraseña</th>
-                        <th>Acciones</th>
+                        <th>Role</th>
+                        <th class="{{(collect(Auth::user()->role->json_role["permisos"]["noticias"]))->search("ver")>-1  ? '': 'd-none' }}">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,8 +43,9 @@
                             <td>{{$usuario->name}}</td>
                             <td>{{$usuario->email}}</td>
                             <td>{{$usuario->password}}</td>
+                            <td>{{$usuario->role->nombre_role}}</td>
                             <td>
-                                <a href="{{route('usuarios.edit', $usuario->id)}}" class="btn btn-success"><span class="ion ion-edit"></span>&nbsp;Editar</a>
+                                <a href="{{route('usuarios.edit', $usuario->id)}}" class="{{(collect(Auth::user()->role->json_role["permisos"]["noticias"]))->search("modificar")>-1  ? '': 'd-none' }} btn btn-success"><span class="ion ion-edit"></span>&nbsp;Editar</a>
                             </td>
                         </tr>
                     @endforeach

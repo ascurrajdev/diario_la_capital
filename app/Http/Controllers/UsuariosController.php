@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 class UsuariosController extends Controller
@@ -28,7 +29,7 @@ class UsuariosController extends Controller
      */
     public function create()
     {
-        return view('users.create', ["url" => "Nuevo"]);
+        return view('users.create', ["url" => "Nuevo","roles"=>Role::all()]);
     }
 
     /**
@@ -53,6 +54,7 @@ class UsuariosController extends Controller
         $user = new User;
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->role_id = $request->input('role_id'); 
         $user->password = Hash::make($request->input('password'));
         $user->save();
         return redirect('usuarios');
@@ -77,7 +79,7 @@ class UsuariosController extends Controller
      */
     public function edit($id)
     {
-        return view('users.edit',['url' => "Editar", "usuario" => User::find($id)]);
+        return view('users.edit',['url' => "Editar", "usuario" => User::find($id),"roles"=>Role::all()]);
     }
 
     /**

@@ -21,25 +21,25 @@
 
     <section class="content">
         <div class="container-fluid">
-            <a href="{{route("roles.create")}}" class="btn btn-success">Crear nuevo role</a>
+            <a href="{{route("roles.create")}}" class="{{(collect(Auth::user()->role->json_role["permisos"]["roles"]))->search("crear")>-1  ? '': 'd-none' }} btn btn-success">Crear nuevo role</a>
             <table class="table mt-2">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Nombre Role</th>
+                        <th>Nombre</th>
                         <th>Permisos</th>
-                        <th>Acciones</th>
+                        <th class="{{(collect(Auth::user()->role->json_role["permisos"]["roles"]))->search("modificar")>-1  ? '': 'd-none' }}">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Administrador</td>
-                        <td>["usuarios":{
-                                "crear", "modificar", "eliminar", "ver"
-                            }]</td>
-                        <td><button class="btn btn-success">Editar</button></td>
-                    </tr>
+                    @foreach ($roles as $role)
+                      <tr>
+                        <td>{{$role->id}}</td>
+                        <td>{{$role->nombre_role}}</td>
+                        <td>{{collect($role->json_role)}}</td>
+                        <td><a href="{{route("roles.edit",$role->id)}}" class="{{(collect(Auth::user()->role->json_role["permisos"]["roles"]))->search("modificar")>-1  ? '': 'd-none' }} btn btn-success">Editar</a></td>
+                      </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

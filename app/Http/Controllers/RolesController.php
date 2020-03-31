@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use App\Role;
+use App\User;
 class RolesController extends Controller
 {
     public function __construct(){
@@ -16,7 +17,10 @@ class RolesController extends Controller
      */
     public function index()
     {
-        return view('users.roles.index', ["url"=>"Roles de Usuario"]);
+        if((collect(Auth::user()->role->json_role["permisos"]["roles"]))->search("ver")<0){
+            return redirect(route('home'));
+        }
+        return view('users.roles.index', ["url"=>"Roles de Usuario", "roles"=>Role::paginate(25)]);
     }
 
     /**
@@ -26,6 +30,9 @@ class RolesController extends Controller
      */
     public function create()
     {
+        if((collect(Auth::user()->role->json_role["permisos"]["roles"]))->search("crear")<0){
+            return redirect(route('home'));
+        }
         return view("users.roles.create", ["url"=>"Crear"]);
     }
 
@@ -37,7 +44,12 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $role = new Role;
+        $role->id=null;
+        $role->nombre_role=$request->input("nombre_role");
+        $role->json_role=collect(["permisos"=>["usuarios"=>$request->input("usuarios"),"noticias"=>$request->input("noticias"),"roles"=>$request->input("roles"),"encuestas"=>$request->input("encuestas"),"lectores"=>$request->input("lectores")]]);
+        $role->save();
+        return redirect(route("roles.index"));
     }
 
     /**
@@ -59,6 +71,10 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
+        if((collect(Auth::user()->role->json_role["permisos"]["roles"]))->search("modificar")<0){
+            return redirect(route('home'));
+        }
+        return view('users.roles.edit',["url"=>"Editar Role", "role"=>Role::find($id)]);
     }
 
     /**
@@ -70,7 +86,11 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $role = Role::find($id);
+        $role->nombre_role=$request->input("nombre_role");
+        $role->json_role=collect(["permisos"=>["usuarios"=>$request->input("usuarios"),"noticias"=>$request->input("noticias"),"roles"=>$request->input("roles"),"encuestas"=>$request->input("encuestas"),"lectores"=>$request->input("lectores")]]);
+        $role->save();
+        return redirect(route("roles.index"));
     }
 
     /**

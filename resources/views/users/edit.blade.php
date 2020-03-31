@@ -54,6 +54,18 @@
                                 <label>Email:</label>
                                 <input type="email" value="{{$usuario->email}}" class="form-control"/>
                             </div>
+                            <div class="form-group">
+                              <label for="rol">Role de usuario:</label>
+                              <select class="form-control" name="role_id" id="rol">
+                                @foreach ($roles as $role)
+                                    @if ($usuario->role->id === $role->id)
+                                      <option selected="selected" value="{{$role->id}}">{{$role->nombre_role}}</option>                                        
+                                    @else
+                                      <option value="{{$role->id}}">{{$role->nombre_role}}</option>
+                                    @endif
+                                @endforeach
+                              </select>
+                          </div>
                             <button class="btn btn-success" type="submit"><i class="ion ion-archive"></i>&nbsp; Guardar Cambios</button>
                             <a href="{{route('usuarios.index')}}" class="btn btn-primary"><i class="ion ion-arrow-left-c"></i> Volver</a>
                         </form>

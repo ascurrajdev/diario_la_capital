@@ -191,7 +191,7 @@
                                     </a>
                                   </li>
                                   <li class="nav-item has-treeview">
-                                    <a href="#" class="nav-link">
+                                    <a href="#" class="nav-link {{(collect(Auth::user()->role->json_role["permisos"]["noticias"]))->search("ver")>-1  ? '': 'd-none' }}">
                                       <i class="nav-icon ion ion-ios-paper"></i>
                                       <p>
                                          Noticias
@@ -210,7 +210,7 @@
                                     </ul>
                                   </li>
                                   <li class="nav-item has-treeview">
-                                    <a href="#" class="nav-link">
+                                    <a href="#" class="nav-link {{(collect(Auth::user()->role->json_role["permisos"]["usuarios"]))->search("ver")>-1  ? '': 'd-none' }}">
                                       <i class="nav-icon ion ion-person"></i>
                                       <p>
                                          Usuarios
@@ -219,7 +219,7 @@
                                     </a>
                                     <ul class="nav nav-treeview">
                                       <li class="nav-item">
-                                        <a class="nav-link" href="{{url("roles")}}">
+                                        <a class="nav-link {{(collect(Auth::user()->role->json_role["permisos"]["roles"]))->search("ver")>-1  ? '': 'd-none' }}" href="{{url("roles")}}">
                                           <i class="ion nav-icon ion-ios-list"></i>
                                           Permisos</a></li>
                                       <li class="nav-item">

@@ -21,7 +21,7 @@
 
     <section class="content">
         <div class="container-fluid">
-            <a href="{{url('post/create')}}" class="btn bg-gradient-success mb-2"><span class="ion ion-plus"></span>&nbsp;Nueva noticia</a><br/>
+            <a href="{{url('post/create')}}" class="{{(collect(Auth::user()->role->json_role["permisos"]["noticias"]))->search("crear")>-1  ? '': 'd-none' }} btn bg-gradient-success mb-2"><span class="ion ion-plus"></span>&nbsp;Nueva noticia</a><br/>
             <div>
               @php
                 $arrayRelevanciaStyle = array("1"=>'badge-primary',"2"=>'badge-warning',"3"=>'badge-danger');
@@ -47,9 +47,9 @@
                          {{date("H:i:s",strtotime($noticia->created_at))}}
                         </span>
                     
-                        <a href="{{url('post/'.$noticia->id)}}" class="btn text-decoration-none btn-flat bg-gradient-secondary"><span class="ion ion-eye"></span></a>  
-                        <a href="{{url('post/'.$noticia->id.'/edit')}}" class="btn btn-flat text-decoration-none bg-gradient-primary"><span class="ion ion-edit"></span></a>
-                        <boton-eliminar id="{{$noticia->id}}"/>
+                        <a href="{{url('post/'.$noticia->id)}}" class="{{(collect(Auth::user()->role->json_role["permisos"]["noticias"]))->search("ver")>-1  ? '': 'd-none' }} btn text-decoration-none btn-flat bg-gradient-secondary"><span class="ion ion-eye"></span></a>  
+                        <a href="{{url('post/'.$noticia->id.'/edit')}}" class="{{(collect(Auth::user()->role->json_role["permisos"]["noticias"]))->search("modificar")>-1  ? '': 'd-none' }} btn btn-flat text-decoration-none bg-gradient-primary"><span class="ion ion-edit"></span></a>
+                        <boton-eliminar class="{{(collect(Auth::user()->role->json_role["permisos"]["noticias"]))->search("ver")>-1  ? '': 'd-none' }}" id="{{$noticia->id}}"/>
                         <!--<button class="btn btn-flat bg-gradient-danger" data-id="{{$noticia->id}}"><span class="ion ion-trash-a"></span></button>
                         -->
                     </div>

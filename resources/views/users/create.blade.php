@@ -75,6 +75,14 @@
                                     @enderror
                                 
                             </div>
+                            <div class="form-group">
+                              <label for="role" >{{ __('Role de usuario') }}</label>
+                              <select name="role_id" id="role" class="form-control">
+                                  @foreach ($roles as $role)
+                                      <option value="{{$role->id}}">{{$role->nombre_role}}</option>
+                                  @endforeach
+                              </select>
+                          </div>
     
                             <div class="form-group ">
                                 <label for="password">{{ __('Password') }}</label>
