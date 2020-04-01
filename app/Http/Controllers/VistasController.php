@@ -3,26 +3,44 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Encuesta;
-use App\Color;
-class EncuestasController extends Controller
+use Victorybiz\GeoIPLocation\GeoIPLocation;
+
+class VistasController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(){
-        $this->middleware('auth');
-    }
     public function index()
     {
-        /*$encuesta = new Encuesta;
-        $encuesta->id=null;
-        $encuesta->contenido="Nose";
-        $encuesta->opciones=collect(["1"=>"Si","2"=>"No","3"=>"No lo se"]);
-        $encuesta->save();*/
-        return view('encuestas.index', ["url" => "Encuestas", "encuestas"=>Encuesta::paginate(25)]);
+        $geoip = new GeoIPLocation();
+        $geoip->setIp('190.104.182.28');
+        if (isset($_SERVER["HTTP_CLIENT_IP"])){
+
+            return $_SERVER["HTTP_CLIENT_IP"];
+
+        }elseif (isset($_SERVER["HTTP_X_FORWARDED_FOR"])){
+
+            return $_SERVER["HTTP_X_FORWARDED_FOR"];
+
+        }elseif (isset($_SERVER["HTTP_X_FORWARDED"])){
+
+            return $_SERVER["HTTP_X_FORWARDED"];
+
+        }elseif (isset($_SERVER["HTTP_FORWARDED_FOR"])){
+
+            return $_SERVER["HTTP_FORWARDED_FOR"];
+
+        }elseif (isset($_SERVER["HTTP_FORWARDED"])){
+
+            return $_SERVER["HTTP_FORWARDED"];
+
+        }else{
+
+            return $_SERVER["REMOTE_ADDR"];
+
+        }
     }
 
     /**
@@ -32,12 +50,7 @@ class EncuestasController extends Controller
      */
     public function create()
     {
-        /*$color = new Color;
-        $color->id=null;
-        $color->nombre_color="Warning";
-        $color->style_color="bg-warning";
-        $color->save();*/
-        return view('encuestas.nuevo',["url"=>"Nuevo","colores"=>Color::all()]);
+        //
     }
 
     /**
@@ -48,7 +61,7 @@ class EncuestasController extends Controller
      */
     public function store(Request $request)
     {
-        return "Hola a todos";
+        //
     }
 
     /**
@@ -59,7 +72,7 @@ class EncuestasController extends Controller
      */
     public function show($id)
     {
-        $encuesta = Encuesta::find($id);
+        //
     }
 
     /**

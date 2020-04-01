@@ -21,69 +21,32 @@
 
     <section class="content">
         <div class="container-fluid">
-            <a href="{{url('categoria/create')}}" class="btn bg-gradient-success mb-2"><span class="ion ion-plus"></span>&nbsp;Nueva Encuesta</a><br/>
+            <a href="{{url('encuestas/create')}}" class="btn bg-gradient-success mb-2"><span class="ion ion-plus"></span>&nbsp;Nueva Encuesta</a><br/>
             <div class="card">
                 <div class="card-body">
                     <div class="container-fluid">
-                        <a href="#" class="text-decoration-none card shadow mt-2 text-dark">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <div class="row">
-                                            <div class="col-lg-12 float-left"><h2>Encuesta sobre x cosa</h2></div>
-                                            <div class="col-lg-12 float-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, veniam quod magni hic facere eius odit consequatur? Consequuntur dignissimos reprehenderit fugit, veritatis perferendis cum iusto maxime, nostrum debitis vero quibusdam.</div>
+                        @foreach ($encuestas as $encuesta)
+                            <div class="text-decoration-none card shadow mt-2 text-dark">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-lg-12 float-left">{{substr($encuesta->contenido,0,40)."..."}}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="row">
-                                            <div class="col-lg-12 float-right h-100 w-100">
-                                                <canvas id="estadistica"></canvas>
+                                        <div class="col-lg-4">
+                                            <div class="row">
+                                                <div class="col-lg-12 float-right h-100 w-100">
+                                                    <button class="btn float-right mr-1 btn-danger">Eliminar</button>
+                                                    <button class="btn float-right mr-1 btn-success">Editar</button>
+                                                    <button class="btn float-right mr-1 btn-primary">Ver</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </a>
-    
-                        <a href="#" class="text-decoration-none card shadow mt-2 text-dark">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <div class="row">
-                                            <div class="col-lg-12 float-left"><h2>Encuesta sobre x cosa</h2></div>
-                                            <div class="col-lg-12 float-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, veniam quod magni hic facere eius odit consequatur? Consequuntur dignissimos reprehenderit fugit, veritatis perferendis cum iusto maxime, nostrum debitis vero quibusdam.</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="row">
-                                            <div class="col-lg-12 float-right h-100 w-100">
-                                                <canvas id="estadistica1"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-    
-                        <a href="#" class="text-decoration-none card shadow mt-2 text-dark">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <div class="row">
-                                            <div class="col-lg-12 float-left"><h2>Encuesta sobre x cosa</h2></div>
-                                            <div class="col-lg-12 float-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, veniam quod magni hic facere eius odit consequatur? Consequuntur dignissimos reprehenderit fugit, veritatis perferendis cum iusto maxime, nostrum debitis vero quibusdam.</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="row">
-                                            <div class="col-lg-12 float-right h-100 w-100">
-                                                <canvas id="estadistica2"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                        @endforeach
                     </div>
                 </div>
             </div>

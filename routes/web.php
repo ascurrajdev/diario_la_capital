@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 Auth::routes();
+Route::resource('vistas', 'VistasController');
 Route::resource('roles', 'RolesController');
 Route::resource('encuestas', 'EncuestasController');
 Route::resource('post', 'PostController');
