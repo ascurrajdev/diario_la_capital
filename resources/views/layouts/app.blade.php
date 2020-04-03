@@ -228,6 +228,11 @@
                                           Todos los usuarios</a></li>
                                     </ul>
                                   </li>
+                                  <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                      <i class="ion nav-icon ion-stats-bars"></i>
+                                      Encuestas</a>
+                                  </li>
                                 </ul>
                               </nav>
                               <!-- /.sidebar-menu -->

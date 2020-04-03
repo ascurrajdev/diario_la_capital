@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Encuesta;
 use App\Color;
+use App\Respuesta;
 class EncuestasController extends Controller
 {
     /**
@@ -17,11 +18,6 @@ class EncuestasController extends Controller
     }
     public function index()
     {
-        /*$encuesta = new Encuesta;
-        $encuesta->id=null;
-        $encuesta->contenido="Nose";
-        $encuesta->opciones=collect(["1"=>"Si","2"=>"No","3"=>"No lo se"]);
-        $encuesta->save();*/
         return view('encuestas.index', ["url" => "Encuestas", "encuestas"=>Encuesta::paginate(25)]);
     }
 
@@ -32,11 +28,6 @@ class EncuestasController extends Controller
      */
     public function create()
     {
-        /*$color = new Color;
-        $color->id=null;
-        $color->nombre_color="Warning";
-        $color->style_color="bg-warning";
-        $color->save();*/
         return view('encuestas.nuevo',["url"=>"Nuevo","colores"=>Color::all()]);
     }
 
@@ -48,7 +39,12 @@ class EncuestasController extends Controller
      */
     public function store(Request $request)
     {
-        return "Hola a todos";
+        $encuesta = new Encuesta;
+        $encuesta->id=null;
+        $encuesta->contenido = $request->input("contenido");
+        $encuesta->opciones=collect(["botones" => [$request->input("boton1"),$request->input("boton2"),$request->input("boton3")]]);
+        $encuesta->save();
+        return redirect(route("encuestas.index"));
     }
 
     /**
@@ -59,7 +55,8 @@ class EncuestasController extends Controller
      */
     public function show($id)
     {
-        $encuesta = Encuesta::find($id);
+        $cantidadJson = collect([Respuesta::where('opcion_id', 1)->count(),Respuesta::where('opcion_id', 2)->count(),Respuesta::where('opcion_id', 3)->count()]);
+        return view("encuestas.show",["url"=>"Ver", "encuesta"=>Encuesta::find($id),"cantidad"=>$cantidadJson]);
     }
 
     /**

@@ -39,7 +39,7 @@
                                                 <div class="col-lg-12 float-right h-100 w-100">
                                                     <button class="btn float-right mr-1 btn-danger">Eliminar</button>
                                                     <button class="btn float-right mr-1 btn-success">Editar</button>
-                                                    <button class="btn float-right mr-1 btn-primary">Ver</button>
+                                                    <a href="{{url("encuestas/".$encuesta->id)}}" class="btn float-right mr-1 btn-primary">Ver</a>
                                                 </div>
                                             </div>
                                         </div>

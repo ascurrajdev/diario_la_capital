@@ -45,10 +45,11 @@
                       </div>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form method="POST" action="{{url('encuestas')}}">
+                          @csrf
                           <div class="form-group">
                             <label>Contenido: </label>
-                            <textarea class="form-control" rows="4" placeholder="Escribe el contenido de la encuesta"></textarea>
+                            <textarea name="contenido" class="form-control" rows="4" placeholder="Escribe el contenido de la encuesta"></textarea>
                           </div>
                           <div class="form-group">
                             <label>Acciones: </label>
@@ -93,7 +94,9 @@
         e.preventDefault();
         if($('.btn-accion').length<3){
           console.log($('.btn-accion').length);
-          $('#acciones').append(`<div class='mr-2 btn ${$('#colorSelector :selected').data('color')} btn-accion'>Aceptar</div>`);
+          $('#acciones').append(`<div data-id="${$('.btn-accion').length+1}" data-style="${$('#colorSelector :selected').data('color')}" class='mr-2 btn ${$('#colorSelector :selected').data('color')} btn-accion'>&nbsp;</div>`);
+          $('#acciones').append(`<input type="hidden" data-id="${$('.btn-accion').length}" class="btn${$('.btn-accion').length}" name="boton${$('.btn-accion').length}[]" value=""/>`);
+          $('#acciones').append(`<input type="hidden" class="btn${$('.btn-accion').length}" name="boton${$('.btn-accion').length}[]" value="${$('#colorSelector :selected').data('color')}"/>`);
           console.log($('.btn-accion').length);
           if($('.btn-accion')[$('.btn-accion').length-1]){
             ($('.btn-accion')[$('.btn-accion').length-1]).addEventListener('click',(e)=>{
@@ -102,16 +105,24 @@
             e.target.focus();
           });
           ($('.btn-accion')[$('.btn-accion').length-1]).addEventListener('keydown',(e)=>{
-            console.log(e.keyCode);
             if(e.keyCode == "13"){
               e.preventDefault();
+              console.log("Modificando el input btn"+(parseInt(e.target.getAttribute("data-id"))));
+              ($(`.btn${parseInt(e.target.getAttribute("data-id"))}`)[0]).setAttribute("value",e.target.innerHTML);
               e.target.setAttribute("contenteditable","false");
               return false;
             }
           });
+          ($('.btn-accion')[$('.btn-accion').length-1]).addEventListener('blur',(e)=>{
+              e.preventDefault();
+              console.log("Modificando el input btn"+(parseInt(e.target.getAttribute("data-id"))));
+              ($(`.btn${parseInt(e.target.getAttribute("data-id"))}`)[0]).setAttribute("value",e.target.innerHTML);
+              e.target.setAttribute("contenteditable","false");
+          });
           ($('.btn-accion')[$('.btn-accion').length-1]).addEventListener('dblclick',(e)=>{
             e.preventDefault();
             tag = e.target;
+            $(`.btn${parseInt(e.target.getAttribute("data-id"))}`).remove();
             tag.remove();
           }); 
           } 
