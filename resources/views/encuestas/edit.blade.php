@@ -32,7 +32,7 @@
                 <div class="card card-outline card-info">
                   <div class="card-header">
                     <h3 class="card-title">
-                      {{$noticia->titulo_noticia}}
+                        Encuesta Nº {{$encuesta->id}}
                     </h3>
                     <!-- tools box -->
                     <div class="card-tools">
@@ -47,45 +47,25 @@
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body pad">
-                    <div class="mb-2">
-                      <form>
-                        <div class="row">
-                          <div class="form-group col-lg-5">
-                            <label for="tipoNoticia">Categoria de la noticia:</label>
-                            <select id="tipoNoticia" class="form-control">
-                              <option>{{$noticia->categoria->nombre_categoria}}</option>
-                            </select>
-                          </div>
-
-                          <div class="form-group col-lg-5">
-                            <label for="nivelRelevancia">Nivel de relevancia:</label>
-                            <select id="nivelRelevancia" class="form-control">
-                              <option>{{$noticia->relevancia->nombre_relevancia}}</option>
-                            </select>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                    <div class="mb-3">
-                      <div class="form-group">
-                          <label>Contenido:</label>
-                          <div>{!!trans($noticia->contenido_noticia)!!}</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer">
-                    <p class="text-sm mt-2">
-                      <a href="{{url('post')}}" class="btn btn-success"><i class="ion ion-arrow-left-c"></i> Volver</a>
+                    <form method="POST" action="{{url("encuestas/".$encuesta->id)}}">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label>Contenido: </label>
+                        <textarea class="form-control" name="contenido">{{$encuesta->contenido}}</textarea>
+                    </div>   
+                    <p class="text-sm mb-0">
+                        <button type="submit" class="btn btn-success">Guardar Cambios</button>
                     </p>
+                </form>
                   </div>
-                </div>
               </div>
               <!-- /.col-->
             </div>
         </div>
-
     </div>
   </section>
+</div>
 @endsection
 
 @section('scriptbody')

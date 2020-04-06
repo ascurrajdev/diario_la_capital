@@ -23,5 +23,5 @@ Route::resource('encuestas', 'EncuestasController');
 Route::resource('post', 'PostController');
 Route::resource('categoria', 'CategoriasController');
 Route::resource('usuarios', 'UsuariosController');
-
+Route::resource('visitas', 'VisitasController');
 Route::get('/home', 'HomeController@index')->name('Dashboard');

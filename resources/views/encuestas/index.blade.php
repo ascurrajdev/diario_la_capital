@@ -27,22 +27,12 @@
                     <div class="container-fluid">
                         @foreach ($encuestas as $encuesta)
                             <div class="text-decoration-none card shadow mt-2 text-dark">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-lg-8">
-                                            <div class="row">
-                                                <div class="col-lg-12 float-left">{{substr($encuesta->contenido,0,40)."..."}}</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="row">
-                                                <div class="col-lg-12 float-right h-100 w-100">
-                                                    <button class="btn float-right mr-1 btn-danger">Eliminar</button>
-                                                    <button class="btn float-right mr-1 btn-success">Editar</button>
-                                                    <a href="{{url("encuestas/".$encuesta->id)}}" class="btn float-right mr-1 btn-primary">Ver</a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="card-header">
+                                   <div class="card-title">{{substr($encuesta->contenido,0,40)."..."}}</div>
+                                   <div class="card-tools"> 
+                                        <a href="{{url("encuestas/".$encuesta->id)}}" class="btn btn-primary">Ver</a>
+                                        <a href="{{url("encuestas/".$encuesta->id."/edit")}}"class="btn btn-success">Editar</a>
+                                        <boton-eliminar class="{{(collect(Auth::user()->role->json_role["permisos"]["encuestas"]))->search("eliminar")>-1  ? '': 'd-none' }}" id="{{$encuesta->id}}"/>
                                     </div>
                                 </div>
                             </div>

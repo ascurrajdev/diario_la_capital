@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Victorybiz\GeoIPLocation\GeoIPLocation;
-
+use App\Country;
+use App\Vista;
 class VistasController extends Controller
 {
     /**
@@ -16,7 +17,7 @@ class VistasController extends Controller
     {
         $geoip = new GeoIPLocation();
         $geoip->setIp('190.104.182.28');
-        if (isset($_SERVER["HTTP_CLIENT_IP"])){
+        /*if (isset($_SERVER["HTTP_CLIENT_IP"])){
 
             return $_SERVER["HTTP_CLIENT_IP"];
 
@@ -40,6 +41,18 @@ class VistasController extends Controller
 
             return $_SERVER["REMOTE_ADDR"];
 
+        }*/
+        $vistaAux = Vista::where('ip_cliente', '190.104.182.28')->whereDate('created_at', date("Y-m-d"))->where('post_id','1')->get();
+        if(sizeOf($vistaAux)<1){
+            $vista = new Vista;
+            $vista->id = null;
+            $vista->post_id = 1;
+            $vista->ip_cliente = '190.104.182.28';
+            $vista->pais_id = (Country::where('nombre_pais',$geoip->getCountry())->get())[0]->id;
+            $vista->save();
+            return $vista;
+        }else{
+            return "La visita ya fue realizada";
         }
     }
 
