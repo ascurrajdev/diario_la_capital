@@ -60,6 +60,7 @@
                   <!-- /.card-body -->
             </div>
             @endforeach
+            {{$Noticias->links()}}
           </div>
         </div>
 

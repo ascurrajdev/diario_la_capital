@@ -37,6 +37,7 @@
                                 </div>
                             </div>
                         @endforeach
+                        {{$encuestas->links()}}
                     </div>
                 </div>
             </div>
