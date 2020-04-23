@@ -9,4 +9,7 @@ class Encuesta extends Model
     protected $casts = [
         'opciones' => 'array'
     ];
+    public function respuestas(){
+        return $this->hasMany('App\Respuesta');
+    }
 }

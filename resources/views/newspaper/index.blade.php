@@ -30,7 +30,8 @@
             @foreach($Noticias as $noticia)
             <div class="card card-outline {{$arrayNoticiasStyle[$noticia->relevancia->id]}}">
                 <div class="card-header">
-                    <h3 class="card-title">{{$noticia->titulo_noticia}}</h3>
+                  <img src="{{$noticia->asset->asset_url}}" class="card-title" style="width:10%"/>
+                    <h3 class="ml-2">{{$noticia->titulo_noticia}}</h3>
                     <span class="ml-2 badge {{$noticia->categoria->color->style_color}}">{{$noticia->categoria->nombre_categoria}}</span>
                     <span class="pl-2 badge {{$arrayRelevanciaStyle[$noticia->relevancia->id]}}">{{$noticia->relevancia->nombre_relevancia}}</span>
                     <div class="card-tools">

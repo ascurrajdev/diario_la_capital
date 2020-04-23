@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Relevancia;
 use App\Categoria;
+use App\ContenidoAdicional;
 use App\Post;
 use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
@@ -19,6 +20,10 @@ class PostController extends Controller
      */
     public function index()
     {
+        /*$relevancia = new Relevancia;
+        $relevancia->id = null;
+        $relevancia->nombre_relevancia = "Baja";
+        $relevancia->save();*/
         $paginador = Post::orderBy('created_at', 'desc')
                             ->paginate(25);
         return view('newspaper.index',['url'=>'Noticias','Noticias' => $paginador]);
@@ -44,14 +49,31 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            "contenido"=>"required|string",
+            "introduccion"=>"required|string",
+            "titulo"=>"required|max:255|string",
+            "relevancia"=>"required|min:1|number",
+            "categoria"=>"required|min:1|number",
+            "materiales"=>"required"
+        ]);
         $post = new Post;
         $post->id = null;
         $post->user_id = Auth::id();
         $post->contenido_noticia = $request->input('contenido');
+        $post->introduccion_noticia = $request->input('introduccion');
         $post->titulo_noticia = $request->input('titulo');
         $post->nivel_relevancia_id = $request->input('relevancia');
         $post->categoria_id = $request->input('categoria');
         $post->save();
+
+        $asset = new ContenidoAdicional;
+        $asset->id = null;
+        $asset->asset_url = str_replace($request->path(),"",$request->url()).'storage/'.Storage::disk('public')->putFile('posts', $request->file('materiales'), 'public');
+        //$asset->asset_url = 'storage/'.Storage::disk('public')->putFile('posts', $request->file('materiales'), 'public');
+        $asset->post_id = $post->id;
+        $asset->save(); 
+        
         return redirect("post");
     }
 
@@ -63,7 +85,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        return view('newspaper.show',['url' => $id,'noticia' => Post::find($id) ]);
+        return view('newspaper.show',['url' => $id,'noticia' => Post::findOrFail($id) ]);
     }
 
     /**
@@ -74,7 +96,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        return view('newspaper.edit',['url' => $id, 'noticia' => Post::find($id), 'categorias' => Categoria::all(), 'relevancias' => Relevancia::all()]);
+        return view('newspaper.edit',['url' => $id, 'noticia' => Post::findOrFail($id), 'categorias' => Categoria::all(), 'relevancias' => Relevancia::all()]);
     }
 
     /**
@@ -86,7 +108,15 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $PostAux = Post::find($id);
+        $this->validate($request,[
+            "introduccionNoticia"=>"required|string",
+            "contenidoNoticia"=>"required|string",
+            "tituloNoticia"=>"required|max:255|string",
+            "nivelRelevancia"=>"required|min:1|number",
+            "categoriaNoticia"=>"required|min:1|number"
+        ]);
+        $PostAux = Post::findOrFail($id);
+        $PostAux->introduccion_noticia = $request->input("introduccionNoticia");
         $PostAux->contenido_noticia = $request->input("contenidoNoticia");
         $PostAux->titulo_noticia = $request->input("tituloNoticia");
         $PostAux->nivel_relevancia_id = $request->input("nivelRelevancia");
@@ -103,6 +133,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        Post::destroy($id);
+        $post = Post::findOrFail($id);
+        $post->delete();
     }
 }

@@ -1,0 +1,1 @@
+<a href="{{ $url }}" class="button" target="_blank" rel="noopener">{{ $slot }}</a>

@@ -98,7 +98,7 @@
                      </div>
                  </div>
                  <button type="submit" class="btn btn-success">Guardar</button>
-                 <button class="btn btn-primary">Volver</button>
+                 <a class="btn btn-primary" href="{{route('roles.index')}}">Volver</a>
             </form>
         </div>
   </section>

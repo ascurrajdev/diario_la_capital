@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Vista;
 class VisitasController extends Controller
 {
     /**
@@ -13,7 +13,14 @@ class VisitasController extends Controller
      */
     public function index()
     {
-        return view("visitas.index", ["url"=>"Visitas"]);
+        //$visitasUltimosDiasDeLaSemana = Vista::where('created_at', ">=", date("Y-m-d", strtotime(date("Y-m-d")."- 7 days")));
+        $visitasContenido = collect([]);
+        $visitasLabelFechas = collect([]);
+        for($cont=7; $cont>0; $cont--){
+            $visitasContenido->push(Vista::whereDate('created_at', date("Y-m-d", strtotime(date("Y-m-d")."- {$cont} days")))->count()); 
+            $visitasLabelFechas->push(date("M d", strtotime(date("Y-m-d")."- {$cont} days")));
+        }
+        return view("visitas.index", ["url"=>"Visitas", "vistasData"=>$visitasContenido, "visitasLabel"=>$visitasLabelFechas]);
     }
 
     /**

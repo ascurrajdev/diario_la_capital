@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Role;
 use App\User;
+use App\Mail\MailNewsletterDiario;
 class RolesController extends Controller
 {
     public function __construct(){
@@ -44,6 +45,9 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            "nombre_role"=>"required|string|max:100"
+        ]);
         $role = new Role;
         $role->id=null;
         $role->nombre_role=$request->input("nombre_role");
@@ -86,7 +90,10 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $role = Role::find($id);
+        $this->validate($request,[
+            "nombre_role"=>"required|string|max:100"
+        ]);
+        $role = Role::findOrFail($id);
         $role->nombre_role=$request->input("nombre_role");
         $role->json_role=collect(["permisos"=>["usuarios"=>$request->input("usuarios"),"noticias"=>$request->input("noticias"),"roles"=>$request->input("roles"),"encuestas"=>$request->input("encuestas"),"lectores"=>$request->input("lectores")]]);
         $role->save();

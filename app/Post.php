@@ -18,4 +18,7 @@ class Post extends Model
     public function vistas(){
         return $this->hasMany('App\Vista');
     }
+    public function asset(){
+        return $this->hasOne('App\ContenidoAdicional');
+    }
 }

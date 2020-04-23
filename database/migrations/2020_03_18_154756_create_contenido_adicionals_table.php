@@ -16,6 +16,7 @@ class CreateContenidoAdicionalsTable extends Migration
         Schema::create('contenido_adicionals', function (Blueprint $table) {
             $table->id();
             $table->text('asset_url');
+            $table->integer('post_id')->unsigned();
             $table->timestamps();
         });
     }

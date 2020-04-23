@@ -39,8 +39,8 @@
   },
   series: [
     {
-      name: "Series 1",
-      data: [45, 52, 38, 45, 19, 23, 2]
+      name: "Visitas",
+      data: {!!$vistasData!!}
     }
   ],
   fill: {
@@ -53,15 +53,7 @@
     }
   },
   xaxis: {
-    categories: [
-      "01 Jan",
-      "02 Jan",
-      "03 Jan",
-      "04 Jan",
-      "05 Jan",
-      "06 Jan",
-      "07 Jan"
-    ]
+    categories: {!!$visitasLabel!!}
   }
 };
 

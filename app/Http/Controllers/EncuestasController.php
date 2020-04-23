@@ -39,6 +39,9 @@ class EncuestasController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            "contenido"=>"required|max:255|string",
+        ]);
         $encuesta = new Encuesta;
         $encuesta->id=null;
         $encuesta->contenido = $request->input("contenido");
@@ -67,7 +70,7 @@ class EncuestasController extends Controller
      */
     public function edit($id)
     {
-        return view("encuestas.edit",["url"=>"Editar","encuesta"=>Encuesta::find($id)]);
+        return view("encuestas.edit",["url"=>"Editar","encuesta"=>Encuesta::findOrFail($id)]);
     }
 
     /**
@@ -79,7 +82,10 @@ class EncuestasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $encuesta = Encuesta::find($id);
+        $this->validate($request,[
+            "contenido"=>"required|max:255|string"
+        ]);
+        $encuesta = Encuesta::findOrFail($id);
         $encuesta->contenido = $request->input("contenido");
         $encuesta->save();
         return redirect(route("encuestas.index"));
@@ -93,6 +99,7 @@ class EncuestasController extends Controller
      */
     public function destroy($id)
     {
-        Encuesta::destroy($id);
+        $encuesta = Encuesta::findOrFail($id);
+        $encuesta->delete();
     }
 }

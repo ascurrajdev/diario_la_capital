@@ -21,7 +21,7 @@
 
     <section class="content">
         <div class="container-fluid">
-            <a href="{{route("roles.create")}}" class="{{(collect(Auth::user()->role->json_role["permisos"]["roles"]))->search("crear")>-1  ? '': 'd-none' }} btn btn-success">Crear nuevo role</a>
+            <a href="{{route("roles.create")}}" class="{{(collect(Auth::user()->role->json_role["permisos"]["roles"]))->search("crear")>-1  ? '': 'd-none' }} btn btn-success">Crear nuevo role <i class="ion ion-plus"></i></a>
             <table class="table mt-2">
                 <thead>
                     <tr>
@@ -37,7 +37,7 @@
                         <td>{{$role->id}}</td>
                         <td>{{$role->nombre_role}}</td>
                         <td>{{collect($role->json_role)}}</td>
-                        <td><a href="{{route("roles.edit",$role->id)}}" class="{{(collect(Auth::user()->role->json_role["permisos"]["roles"]))->search("modificar")>-1  ? '': 'd-none' }} btn btn-success">Editar</a></td>
+                        <td><a href="{{route("roles.edit",$role->id)}}" class="{{(collect(Auth::user()->role->json_role["permisos"]["roles"]))->search("modificar")>-1  ? '': 'd-none' }} btn btn-success">Editar <i class="ion ion-edit"></i></a></td>
                       </tr>
                     @endforeach
                 </tbody>

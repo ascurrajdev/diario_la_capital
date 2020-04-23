@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,7 @@ Route::resource('categoria', 'CategoriasController');
 Route::resource('usuarios', 'UsuariosController');
 Route::resource('visitas', 'VisitasController');
 Route::get('/home', 'HomeController@index')->name('Dashboard');
+Route::get('mailable', function () {
+
+    return (new App\Mail\CorreoDiarioNoticias(Post::all()))->render();
+});

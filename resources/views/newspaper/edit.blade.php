@@ -82,6 +82,12 @@
                       
                     </div>
                     <div class="mb-3">
+                      <label>Introduccion</label>
+                      <textarea name="introduccionNoticia" class="textarea" id="textarea" placeholder="Place some text here"
+                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$noticia->introduccion_noticia}}</textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label>Contenido</label>
                       <textarea name="contenidoNoticia" class="textarea" id="textarea" placeholder="Place some text here"
                                 style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$noticia->contenido_noticia}}</textarea>
                     </div>
