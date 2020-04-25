@@ -122,6 +122,7 @@
   </div>
 @endsection
 @section('scriptbody')
+<script src="{{mix("js/app.js")}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script>
   var options = {
