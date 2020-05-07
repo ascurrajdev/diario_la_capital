@@ -69,6 +69,21 @@
               <a href="{{url(route('usuarios.index'))}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
+
+          <div class="col-lg-3 col-6 {{(collect(Auth::user()->role->json_role["permisos"]["usuarios"]))->search("ver")>-1  ? '': 'd-none' }}">
+            <!-- small box -->
+            <div class="small-box bg-secondary">
+              <div class="inner">
+                <h3>{{$lectores}}</h3>
+
+                <p>Lectores registrados</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="{{url(route('lectores.index'))}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
           <!-- ./col -->
           <div class="col-lg-3 col-6 {{(collect(Auth::user()->role->json_role["permisos"]["lectores"]))->search("ver")>-1  ? '': 'd-none' }}">
             <!-- small box -->
@@ -112,7 +127,7 @@
                       <div width="380px" class="align-center" style="max-height:650px;" id="grafica"></div>
                     </div>
                     <!-- /.card-body-->
-                    
+
                   </div>
 
             </section>
@@ -126,8 +141,8 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script>
   var options = {
-  series: [20,30,50],
-  labels: ['Paraguay','Brasil','Argentina'],
+  series: {!!$paisesData['cantidad']!!},
+  labels: {!!$paisesData['nombres']!!},
   chart: {
     width: 380,
     type: 'pie'

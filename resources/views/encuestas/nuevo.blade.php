@@ -97,6 +97,7 @@
           $('#acciones').append(`<div data-id="${$('.btn-accion').length+1}" data-style="${$('#colorSelector :selected').data('color')}" class='mr-2 btn ${$('#colorSelector :selected').data('color')} btn-accion'>&nbsp;</div>`);
           $('#acciones').append(`<input type="hidden" data-id="${$('.btn-accion').length}" class="btn${$('.btn-accion').length}" name="boton${$('.btn-accion').length}[]" value=""/>`);
           $('#acciones').append(`<input type="hidden" class="btn${$('.btn-accion').length}" name="boton${$('.btn-accion').length}[]" value="${$('#colorSelector :selected').data('color')}"/>`);
+          $('#acciones').append(`<input type="hidden" class="btn${$('.btn-accion').length}" name="boton${$('.btn-accion').length}[]" value="${$('.btn-accion').length}"/>`);
           console.log($('.btn-accion').length);
           if($('.btn-accion')[$('.btn-accion').length-1]){
             ($('.btn-accion')[$('.btn-accion').length-1]).addEventListener('click',(e)=>{

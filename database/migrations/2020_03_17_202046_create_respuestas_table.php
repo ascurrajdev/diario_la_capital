@@ -17,7 +17,8 @@ class CreateRespuestasTable extends Migration
             $table->id();
             $table->unsignedBigInteger('encuesta_id');
             $table->integer('opcion_id');
-            $table->text('comentario');
+            $table->text('comentario')->charset('utf8');
+            $table->ipAddress('ip_cliente');
             $table->timestamps();
             $table->foreign('encuesta_id')->references('id')->on('encuestas');
         });

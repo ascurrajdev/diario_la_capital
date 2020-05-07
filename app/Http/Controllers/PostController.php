@@ -53,8 +53,8 @@ class PostController extends Controller
             "contenido"=>"required|string",
             "introduccion"=>"required|string",
             "titulo"=>"required|max:255|string",
-            "relevancia"=>"required|min:1|number",
-            "categoria"=>"required|min:1|number",
+            "relevancia"=>"required|min:1",
+            "categoria"=>"required|min:1",
             "materiales"=>"required"
         ]);
         $post = new Post;
@@ -67,13 +67,17 @@ class PostController extends Controller
         $post->categoria_id = $request->input('categoria');
         $post->save();
 
-        $asset = new ContenidoAdicional;
-        $asset->id = null;
-        $asset->asset_url = str_replace($request->path(),"",$request->url()).'storage/'.Storage::disk('public')->putFile('posts', $request->file('materiales'), 'public');
-        //$asset->asset_url = 'storage/'.Storage::disk('public')->putFile('posts', $request->file('materiales'), 'public');
-        $asset->post_id = $post->id;
-        $asset->save(); 
-        
+        $files = $request->file('materiales');
+        if($request->hasFile('materiales')){
+            foreach($files as $file){
+                $asset = new ContenidoAdicional;
+                $asset->id = null;
+                $asset->asset_url = str_replace($request->path(),"",$request->url()).'storage/'.Storage::disk('public')->putFile('posts', $file, 'public');
+                //$asset->asset_url = 'storage/'.Storage::disk('public')->putFile('posts', $request->file('materiales'), 'public');
+                $asset->post_id = $post->id;
+                $asset->save();
+            }
+        }
         return redirect("post");
     }
 
@@ -135,5 +139,6 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->delete();
+        ContenidoAdicional::where('post_id',$id)->delete();
     }
 }

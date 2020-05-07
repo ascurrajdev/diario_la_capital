@@ -15,7 +15,7 @@ class CreateEncuestasTable extends Migration
     {
         Schema::create('encuestas', function (Blueprint $table) {
             $table->id();
-            $table->text('contenido');
+            $table->text('contenido')->charset('utf8');
             $table->text('opciones');
             $table->timestamps();
         });

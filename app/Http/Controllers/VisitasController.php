@@ -17,7 +17,7 @@ class VisitasController extends Controller
         $visitasContenido = collect([]);
         $visitasLabelFechas = collect([]);
         for($cont=7; $cont>0; $cont--){
-            $visitasContenido->push(Vista::whereDate('created_at', date("Y-m-d", strtotime(date("Y-m-d")."- {$cont} days")))->count()); 
+            $visitasContenido->push(Vista::whereDate('created_at', date("Y-m-d", strtotime(date("Y-m-d")."- {$cont} days")))->get()->unique('ip_cliente')->count()); 
             $visitasLabelFechas->push(date("M d", strtotime(date("Y-m-d")."- {$cont} days")));
         }
         return view("visitas.index", ["url"=>"Visitas", "vistasData"=>$visitasContenido, "visitasLabel"=>$visitasLabelFechas]);

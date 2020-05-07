@@ -83,7 +83,7 @@
                   </div>
                     <div class="mb-3">
                       <label for="archivo">Material de la noticia (Imagenes)</label><br/>
-                      <input type="file" id="archivo" name="materiales" accept="image/*"/>
+                      <input type="file" id="archivo" name="materiales[]" accept="image/*" multiple/>
                     </div>
                     <div class="mb-3">
                         <label for="textarea">Contenido:</label>

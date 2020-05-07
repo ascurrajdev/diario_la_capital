@@ -30,8 +30,8 @@
                                 <div class="card-header">
                                    <div class="card-title">{{substr($encuesta->contenido,0,40)."..."}}</div>
                                    <div class="card-tools"> 
-                                        <a href="{{url("encuestas/".$encuesta->id)}}" class="btn btn-defaut class="{{(collect(Auth::user()->role->json_role["permisos"]["encuestas"]))->search("modificar")>-1  ? '': 'd-none' }}""><i class="ion ion-eye"></i>&nbsp;{{$encuesta->respuestas->count()}}</a>
-                                        <a href="{{url("encuestas/".$encuesta->id."/edit")}}"class="btn btn-success class="{{(collect(Auth::user()->role->json_role["permisos"]["encuestas"]))->search("modificar")>-1  ? '': 'd-none' }}""><i class="ion ion-edit"></i></a>
+                                        <a href="{{url("encuestas/".$encuesta->id)}}" class="btn btn-defaut {{(collect(Auth::user()->role->json_role['permisos']['encuestas']))->search('modificar')>-1  ? '': 'd-none' }}"><i class="ion ion-eye"></i>&nbsp;{{$encuesta->respuestas->count()}}</a>
+                                        <a href="{{url("encuestas/".$encuesta->id."/edit")}}"class="btn btn-success {{(collect(Auth::user()->role->json_role["permisos"]["encuestas"]))->search("modificar")>-1  ? '': 'd-none' }}"><i class="ion ion-edit"></i></a>
                                         <boton-eliminar class="{{(collect(Auth::user()->role->json_role["permisos"]["encuestas"]))->search("eliminar")>-1  ? '': 'd-none' }}" id="{{$encuesta->id}}"/>
                                     </div>
                                 </div>

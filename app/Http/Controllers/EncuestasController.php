@@ -58,8 +58,12 @@ class EncuestasController extends Controller
      */
     public function show($id)
     {
-        $cantidadJson = collect([Respuesta::where('opcion_id', 1)->count(),Respuesta::where('opcion_id', 2)->count(),Respuesta::where('opcion_id', 3)->count()]);
-        return view("encuestas.show",["url"=>"Ver", "encuesta"=>Encuesta::find($id),"cantidad"=>$cantidadJson]);
+        $encuesta = Encuesta::findOrFail($id);
+        $cantidad = collect([]);
+        for($cont = 0; $cont < sizeOf($encuesta->opciones["botones"]); $cont++){
+            $cantidad->push(Respuesta::where('opcion_id', $cont)->count());
+        }
+        return view("encuestas.show",["url"=>"Ver", "encuesta"=>Encuesta::find($id),"cantidad"=>$cantidad]);
     }
 
     /**
