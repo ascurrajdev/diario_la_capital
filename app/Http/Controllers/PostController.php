@@ -8,10 +8,11 @@ use App\Categoria;
 use App\ContenidoAdicional;
 use App\Post;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 class PostController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -55,7 +56,6 @@ class PostController extends Controller
             "titulo"=>"required|max:255|string",
             "relevancia"=>"required|min:1",
             "categoria"=>"required|min:1",
-            "materiales"=>"required"
         ]);
         $post = new Post;
         $post->id = null;
@@ -78,6 +78,7 @@ class PostController extends Controller
                 $asset->save();
             }
         }
+        Log::info($post);
         return redirect("post");
     }
 

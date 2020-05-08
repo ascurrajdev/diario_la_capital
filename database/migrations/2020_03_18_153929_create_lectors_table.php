@@ -17,6 +17,7 @@ class CreateLectorsTable extends Migration
             $table->id();
             $table->string('nombre_completo');
             $table->string('correo')->unique();
+            $table->string('cedula')->unique();
             $table->timestamps();
         });
     }

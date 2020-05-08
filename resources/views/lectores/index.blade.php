@@ -36,6 +36,9 @@
                                     {{$lector->correo}}
                                   </div>
                                 </div>
+                                <div class="card-footer">
+                                  {{$lector->cedula}}
+                                </div>
                             </div>
                         @endforeach
                         {{$lectores->links()}}
