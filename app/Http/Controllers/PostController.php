@@ -67,16 +67,30 @@ class PostController extends Controller
         $post->categoria_id = $request->input('categoria');
         $post->save();
 
-        $files = $request->file('materiales');
         if($request->hasFile('materiales')){
-            foreach($files as $file){
+            if(!empty($request->file('materiales'))){
+                $files = $request->file('materiales');
+                foreach($files as $file){
+                    $asset = new ContenidoAdicional;
+                    $asset->id = null;
+                    $asset->asset_url = str_replace($request->path(),"",$request->url()).'storage/'.Storage::disk('public')->putFile('posts', $file, 'public');
+                    //$asset->asset_url = 'storage/'.Storage::disk('public')->putFile('posts', $request->file('materiales'), 'public');
+                    $asset->post_id = $post->id;
+                    $asset->save();
+                }
+            }else{
                 $asset = new ContenidoAdicional;
-                $asset->id = null;
-                $asset->asset_url = str_replace($request->path(),"",$request->url()).'storage/'.Storage::disk('public')->putFile('posts', $file, 'public');
-                //$asset->asset_url = 'storage/'.Storage::disk('public')->putFile('posts', $request->file('materiales'), 'public');
+                $asset->id=null;
+                $asset->asset_url = str_replace($request->path(),"",$request->url())."storage/posts/logo.png";
                 $asset->post_id = $post->id;
                 $asset->save();
             }
+        }else{
+            $asset = new ContenidoAdicional;
+            $asset->id=null;
+            $asset->asset_url = str_replace($request->path(),"",$request->url())."storage/posts/logo.png";
+            $asset->post_id = $post->id;
+            $asset->save();
         }
         Log::info($post);
         return redirect("post");
@@ -139,6 +153,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
+        $post->vistas()->delete();
         $post->delete();
         ContenidoAdicional::where('post_id',$id)->delete();
     }
