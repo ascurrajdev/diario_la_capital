@@ -25,7 +25,7 @@
     },
     "dependencies": {
         "apexcharts": "^3.17.1",
-        "chart.js": "^2.9.3",
+        "chart.js": "^2.9.4",
         "laravel-echo": "^1.7.0",
         "leaflet": "^1.6.0",
         "pusher-js": "^5.1.1",
